@@ -8,23 +8,37 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    //constructore injection
+    //constructor injection
     private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository){
         this.studentRepository=studentRepository;
     }
 
-    public Student addStudent(){
-
+    public Student addStudent(Student student){
+        return studentRepository.save(student);
     }
     public List<Student> getAllStudent(){
-
+        return studentRepository.findAll();
     }
-    public Student updateStudent(){
-
+    public Student getStudentById(Long id){
+        return studentRepository.findById(id).orElse(null);
     }
-    public void deleteStudent(){
 
+    public Student updateStudent(Long id,Student newStudent){
+        Student student=studentRepository.findById(id).orElse(null);
+
+        if(student==null){
+            return null;
+        }
+        student.setName(newStudent.getName());
+        student.setEmail(newStudent.getEmail());
+        student.setCourse(newStudent.getCourse());
+        student.setAge(newStudent.getAge());
+
+        return studentRepository.save(student)
+    }
+    public void deleteStudent(Long id){
+        studentRepository.deleteById(id);
     }
 }
