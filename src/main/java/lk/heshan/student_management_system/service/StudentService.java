@@ -36,7 +36,7 @@ public class StudentService {
         student.setCourse(newStudent.getCourse());
         student.setAge(newStudent.getAge());
 
-        return studentRepository.save(student)
+        return studentRepository.save(student);
     }
     public void deleteStudent(Long id){
         studentRepository.deleteById(id);
