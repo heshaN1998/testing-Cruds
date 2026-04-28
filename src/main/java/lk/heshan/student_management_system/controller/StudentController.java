@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/student")
+@RequestMapping("v1/api/Students")
 @CrossOrigin("*")
 public class StudentController {
     private final StudentService studentService;
@@ -15,6 +15,7 @@ public class StudentController {
     public StudentController(StudentService studentService){
         this.studentService=studentService;
     }
+
     @PostMapping
     public Student addStudent(@RequestBody Student student){
         return studentService.addStudent(student);
