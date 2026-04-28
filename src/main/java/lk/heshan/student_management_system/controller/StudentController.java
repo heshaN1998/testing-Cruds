@@ -1,7 +1,7 @@
 package lk.heshan.student_management_system.controller;
 
 import lk.heshan.student_management_system.entity.Student;
-import lk.heshan.student_management_system.service.StudentService;
+import lk.heshan.student_management_system.service.StudentServicess;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("v1/api/Students")
 @CrossOrigin("*")
 public class StudentController {
-    private final StudentService studentService;
+    private final StudentServicess studentService;
 
-    public StudentController(StudentService studentService){
+    public StudentController(StudentServicess studentService){
         this.studentService=studentService;
     }
 

@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentService {
+public class StudentServicess {
     //constructor injection
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository){
+    public StudentServicess(StudentRepository studentRepository){
         this.studentRepository=studentRepository;
     }
 
