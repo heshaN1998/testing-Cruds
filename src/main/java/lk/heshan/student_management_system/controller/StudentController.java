@@ -1,5 +1,6 @@
 package lk.heshan.student_management_system.controller;
 
+import jakarta.validation.Valid;
 import lk.heshan.student_management_system.DTOs.StudentRequestDTOs;
 import lk.heshan.student_management_system.DTOs.StudentResponseDTOs;
 import lk.heshan.student_management_system.service.StudentService;
@@ -18,7 +19,7 @@ public class StudentController {
         this.studentService=studentService;
     }
     @PostMapping
-    public StudentResponseDTOs create(@RequestBody StudentRequestDTOs dto){
+    public StudentResponseDTOs create(@Valid @RequestBody StudentRequestDTOs dto){
         return studentService.createStudent(dto);
     }
     @GetMapping

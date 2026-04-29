@@ -1,9 +1,18 @@
 package lk.heshan.student_management_system.DTOs;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class StudentRequestDTOs {
+    @NotBlank(message = "name is required")
     private String name;
+    @Email(message = "invalid format")
+    @NotBlank(message = "email is required")
     private String email;
+    @NotBlank(message = "course is required")
     private String course;
+    @Min(value = 17,message = "age must over than 16")
     private int age;
 
     public void setName(String name){
