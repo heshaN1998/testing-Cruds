@@ -9,6 +9,7 @@ import lk.heshan.student_management_system.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceIMPL implements StudentService {
@@ -25,24 +26,35 @@ public class ServiceIMPL implements StudentService {
         Student student= StudentMapper.reqDTOToEntity(dto);
         return StudentMapper.entityToRespDTO((studentRepository.save(student)));
     }
+//SAME LOGIC
+//    Student saved = studentRepository.save(student);
+//    StudentResponseDTO response = StudentMapper.entityToRespDTO(saved);
+//    return response;
 
     @Override
     public List<StudentResponseDTOs> getAllStudent() {
-        return List.of();
+        return  studentRepository.findAll()
+                .stream().map(StudentMapper::entityToRespDTO).collect(Collectors.toList());
     }
 
     @Override
     public StudentResponseDTOs getStudentById(Long id) {
-        return null;
+        Student student=studentRepository.findById(id).orElseThrow(()->new RuntimeException("student not found"));
+        return  StudentMapper.entityToRespDTO(student);
     }
 
     @Override
     public StudentResponseDTOs updateStudent(Long id, StudentRequestDTOs dto) {
-        return null;
+        Student student=studentRepository.findById(id).orElseThrow(()->new RuntimeException("student not found"));
+        student.setName(dto.getName());
+        student.setEmail(dto.getEmail());
+        student.setCourse(dto.getCourse());
+        student.setAge(dto.getAge());
+
+        return StudentMapper.entityToRespDTO(studentRepository.save(student));
     }
-
     @Override
-    public void delet(Long id) {
-
+    public void delete(Long id) {
+    studentRepository.deleteById(id);
     }
 }

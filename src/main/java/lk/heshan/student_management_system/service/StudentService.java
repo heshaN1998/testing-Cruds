@@ -10,7 +10,7 @@ public interface StudentService {
     List<StudentResponseDTOs> getAllStudent();
     StudentResponseDTOs getStudentById(Long id);
     StudentResponseDTOs updateStudent(Long id,StudentRequestDTOs dto);
-    void delet(Long id);
+    void delete(Long id);
 
 
 }
