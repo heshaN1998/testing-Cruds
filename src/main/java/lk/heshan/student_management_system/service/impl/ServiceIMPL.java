@@ -6,6 +6,9 @@ import lk.heshan.student_management_system.convertor.StudentMapper;
 import lk.heshan.student_management_system.entity.Student;
 import lk.heshan.student_management_system.repository.StudentRepository;
 import lk.heshan.student_management_system.service.StudentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +59,17 @@ public class ServiceIMPL implements StudentService {
     @Override
     public void delete(Long id) {
     studentRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<StudentResponseDTOs> getStudents(int page, int size) {
+        Pageable pageable= PageRequest.of(page,size);
+        return studentRepository.findAll(pageable).map(StudentMapper::entityToRespDTO);
+    }
+
+    @Override
+    public Page<StudentResponseDTOs> searchStudent(String name, int page, int size) {
+        Pageable pageable=PageRequest.of(page,size);
+        return studentRepository.findByNameContainingIgnoreCase(name,pageable).map(StudentMapper::entityToRespDTO);
     }
 }
