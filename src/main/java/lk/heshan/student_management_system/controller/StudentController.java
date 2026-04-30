@@ -7,6 +7,7 @@ import lk.heshan.student_management_system.DTOs.StudentRequestDTOs;
 import lk.heshan.student_management_system.DTOs.StudentResponseDTOs;
 import lk.heshan.student_management_system.service.StudentService;
 import lk.heshan.student_management_system.service.impl.ServiceIMPL;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,10 +27,11 @@ public class StudentController {
     public StudentResponseDTOs create(@Valid @RequestBody StudentRequestDTOs dto){
         return studentService.createStudent(dto);
     }
+
     @Operation(summary ="return list of students")
     @GetMapping
-    public List<StudentResponseDTOs> getAllStudents(){
-        return studentService.getAllStudent();
+    public Page<StudentResponseDTOs> getAll(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "5") int size){
+        return studentService.getStudents(page,size);
     }
     @Operation(summary ="get specific student by Id")
     @GetMapping("/{id}")
@@ -46,7 +48,14 @@ public class StudentController {
         studentService.delete(id);
         return "Student delete success";
     }
-
-
+    @Operation(summary = "Get List or single according to search")
+    @GetMapping("/search")
+    public Page<StudentResponseDTOs> search(
+            @RequestParam String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size
+    ){
+        return studentService.searchStudent(name,page,size);
+    }
 
 }

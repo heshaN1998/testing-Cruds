@@ -8,7 +8,7 @@ import lk.heshan.student_management_system.repository.StudentRepository;
 import lk.heshan.student_management_system.service.StudentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;-
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,11 +34,6 @@ public class ServiceIMPL implements StudentService {
 //    StudentResponseDTO response = StudentMapper.entityToRespDTO(saved);
 //    return response;
 
-    @Override
-    public List<StudentResponseDTOs> getAllStudent() {
-        return  studentRepository.findAll()
-                .stream().map(StudentMapper::entityToRespDTO).collect(Collectors.toList());
-    }
 
     @Override
     public StudentResponseDTOs getStudentById(Long id) {
